@@ -9,5 +9,6 @@
     "allowJs": true,
     "checkJs": false
   },
-  "include": ["./src/**/*"]
+  "include": ["**/src/**/*.ts", "**/src/**/*.tsx"],
+  "files": ["src/@types/index.d.ts"]
 }

@@ -1,7 +1,16 @@
 import * as React from 'react';
 
+import GlobalStyles from './styles/global';
+import SavingsGoal from './pages/SavingsGoal';
+
 const App: React.FunctionComponent = () => {
-  return <div>Origin Frontend Take Home</div>;
+  return (
+    <>
+      <GlobalStyles />
+
+      <SavingsGoal />
+    </>
+  );
 };
 
 export default App;
