@@ -34,8 +34,10 @@ const SavingsGoal: React.FunctionComponent = () => {
           <AmountSection>
             <TotalAmount>
               <label htmlFor="total">Total amount</label>
-              <span>$</span>
-              <input type="number" name="total" id="total" />
+              <div>
+                <span>$</span>
+                <input type="number" name="total" id="total" />
+              </div>
             </TotalAmount>
 
             <ReachBy>
@@ -61,12 +63,12 @@ const SavingsGoal: React.FunctionComponent = () => {
 
           <Monthly>
             <div>
-              <p>Monthly</p>
+              <p>Monthly Amount</p>
               <p>$521</p>
             </div>
 
             <p>
-              You’re planning <strong>48 monthly deposits</strong> to reach your
+              You’re planning <strong>48 monthly deposits</strong> to reach your{' '}
               <strong>$25,000</strong> goal by <strong>October 2020.</strong>
             </p>
           </Monthly>

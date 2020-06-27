@@ -10,9 +10,8 @@ export const Content = styled.main`
   justify-content: center;
   align-items: center;
 
-  margin: 0 auto 32px auto;
+  margin: 0 auto;
   max-width: 560px;
-  width: 100%;
 
   h1 {
     color: #1b31a8;
@@ -22,9 +21,19 @@ export const Content = styled.main`
     margin: 24px 0;
     text-align: center;
   }
+
+  @media (min-width: 600px) {
+    margin: 0 auto 32px auto;
+
+    h1 {
+      font-size: 24px;
+      letter-spacing: -0.2px;
+      line-height: 32px;
+    }
+  }
 `;
 
-export const Card = styled.section`
+export const Card = styled.article`
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0px 2px 16px rgba(225, 232, 237, 0.8);
@@ -47,14 +56,27 @@ export const Card = styled.section`
     line-height: 20px;
     margin-bottom: 36px;
   }
+
+  @media (min-width: 600px) {
+    padding: 48px 40px;
+
+    h2 {
+      font-size: 32px;
+      letter-spacing: -0.266667px;
+      line-height: 40px;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+  }
 `;
 
 export const AmountSection = styled.section`
   display: flex;
+  flex-direction: column;
 
-  /* border: 1px solid red; */
   margin-bottom: 30px;
-  width: 100%;
 
   label {
     display: block;
@@ -62,24 +84,38 @@ export const AmountSection = styled.section`
     margin-bottom: 4px;
   }
 
-  label + span {
-    display: inline-block;
-    background: #f4f8fa;
-    border: 1px solid #e1e8ed;
-    border-radius: 4px 0px 0px 4px;
-    color: #657786;
-    font-size: 22px;
-    line-height: 26px;
-    letter-spacing: -0.183333px;
-    padding: 16px 20px;
+  @media (min-width: 600px) {
+    flex-direction: row;
   }
 `;
 
-export const TotalAmount = styled.div``;
+export const TotalAmount = styled.div`
+  margin-bottom: 16px;
+
+  div {
+    display: flex;
+    align-items: center;
+
+    span {
+      display: inline-block;
+      background: #f4f8fa;
+      border: 1px solid #e1e8ed;
+      border-radius: 4px 0px 0px 4px;
+      color: #657786;
+      font-size: 22px;
+      line-height: 26px;
+      letter-spacing: -0.183333px;
+      padding: 16px 20px;
+    }
+  }
+
+  @media (min-width: 600px) {
+    margin-bottom: 0;
+    margin-right: 16px;
+  }
+`;
 
 export const ReachBy = styled.div`
-  flex: 1;
-
   > div {
     display: flex;
     align-items: center;
@@ -88,6 +124,12 @@ export const ReachBy = styled.div`
       background: #e1e8ed;
       border: none;
       padding: 20px;
+
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #d6dfe6;
+      }
     }
 
     .btn-prev {
@@ -111,6 +153,8 @@ export const ReachBy = styled.div`
 
       border: 1px solid #e1e8ed;
       height: 59px;
+      padding: 0 32px;
+      width: 100%;
     }
   }
 `;
@@ -137,6 +181,14 @@ export const Monthly = styled.div`
       letter-spacing: -0.216667px;
       line-height: 32px;
       text-align: right;
+
+      @media (min-width: 600px) {
+        font-size: 40px;
+      }
+    }
+
+    @media (min-width: 600px) {
+      font-size: 18px;
     }
   }
 
@@ -155,4 +207,10 @@ export const ConfirmButton = styled.button`
   line-height: 24px;
   padding: 16px;
   width: 100%;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #2a5db0;
+  }
 `;

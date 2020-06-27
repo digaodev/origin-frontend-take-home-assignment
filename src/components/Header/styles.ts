@@ -4,6 +4,7 @@ export const Container = styled.div`
   background-color: #ffffff;
   padding: 16px;
 
-  img {
+  @media (min-width: 600px) {
+    padding: 32px;
   }
 `;

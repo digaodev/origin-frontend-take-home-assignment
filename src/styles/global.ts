@@ -41,5 +41,6 @@ export default createGlobalStyle`
     letter-spacing: -0.166667px;
     line-height: 24px;
     padding: 16px 0 16px 16px;
+    width: 100%;
   }
 `;
