@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Header from '../../components/Header';
+import CurrencyInput from '../../components/CurrencyInput';
 import houseIcon from '../../icons/house.svg';
 import arrowIcon from '../../icons/arrow.svg';
 
@@ -16,6 +17,13 @@ import {
 } from './styles';
 
 const SavingsGoal: React.FunctionComponent = () => {
+  const [totalAmount, setTotalAmount] = React.useState<string>('');
+  const [currentDate, setCurrentDate] = React.useState(new Date());
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTotalAmount(e.target.value);
+  };
+
   return (
     <Container>
       <Header />
@@ -36,13 +44,18 @@ const SavingsGoal: React.FunctionComponent = () => {
               <label htmlFor="total">Total amount</label>
               <div>
                 <span>$</span>
-                <input type="number" name="total" id="total" />
+                <CurrencyInput
+                  id="total"
+                  name="total"
+                  value={totalAmount}
+                  onChange={handleInputChange}
+                />
               </div>
             </TotalAmount>
 
             <ReachBy>
-              <label htmlFor="Reach goal by">Reach goal by</label>
-              <div>
+              <label htmlFor="reachby">Reach goal by</label>
+              <div id="reachby">
                 <button className="btn btn-prev" type="button">
                   <img src={arrowIcon} alt="Previous month" />
                 </button>
