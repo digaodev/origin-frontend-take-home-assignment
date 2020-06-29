@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import CurrencyInput from '../../components/CurrencyInput';
 import houseIcon from '../../icons/house.svg';
 import arrowIcon from '../../icons/arrow.svg';
+import * as dateUtils from '../../utils/dates';
 
 import {
   Container,
@@ -16,9 +17,64 @@ import {
   ConfirmButton
 } from './styles';
 
+interface KeyboardEvent {
+  key: string;
+}
+
 const SavingsGoal: React.FunctionComponent = () => {
-  const [totalAmount, setTotalAmount] = React.useState<string>('');
-  const [currentDate, setCurrentDate] = React.useState(new Date());
+  const [totalAmount, setTotalAmount] = React.useState('');
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [month, setMonth] = React.useState('');
+  const [year, setYear] = React.useState('');
+  const [numberOfMonths, setNumberOfMonths] = React.useState(0);
+  const [monthlyAmount, setMonthlyAmount] = React.useState(0);
+
+  const handleIncrementMonth = React.useCallback(() => {
+    const newDate = dateUtils.add1Month(selectedDate);
+
+    setSelectedDate(newDate);
+  }, [selectedDate]);
+
+  const handleDecrementMonth = React.useCallback(() => {
+    if (selectedDate < new Date()) {
+      return;
+    }
+    const newDate = dateUtils.sub1Month(selectedDate);
+
+    setSelectedDate(newDate);
+  }, [selectedDate]);
+
+  React.useEffect(() => {
+    function handleKeyPress(e: KeyboardEvent): void {
+      if (e.key === 'ArrowLeft') {
+        handleDecrementMonth();
+      } else if (e.key === 'ArrowRight') {
+        handleIncrementMonth();
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [handleDecrementMonth, handleIncrementMonth]);
+
+  React.useEffect(() => {
+    const month = dateUtils.getMonth(selectedDate);
+    const year = dateUtils.getYear(selectedDate);
+    const numMonths = dateUtils.monthsFromNow(selectedDate);
+
+    let amount;
+    if (totalAmount !== '' && numMonths > 0)
+      amount = parseFloat(totalAmount.replace(/,/g, '')) / numMonths;
+    else {
+      amount = 0;
+    }
+
+    setMonth(month);
+    setYear(year);
+    setNumberOfMonths(numMonths);
+    setMonthlyAmount(amount);
+  }, [selectedDate, totalAmount]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTotalAmount(e.target.value);
@@ -56,18 +112,26 @@ const SavingsGoal: React.FunctionComponent = () => {
             <ReachBy>
               <label htmlFor="reachby">Reach goal by</label>
               <div id="reachby">
-                <button className="btn btn-prev" type="button">
+                <button
+                  className="btn btn-prev"
+                  type="button"
+                  onClick={handleDecrementMonth}
+                >
                   <img src={arrowIcon} alt="Previous month" />
                 </button>
                 <div>
                   <p>
-                    <strong>October</strong>
+                    <strong>{month}</strong>
                   </p>
                   <p>
-                    <span>2020</span>
+                    <span>{year}</span>
                   </p>
                 </div>
-                <button className="btn btn-next" type="button">
+                <button
+                  className="btn btn-next"
+                  type="button"
+                  onClick={handleIncrementMonth}
+                >
                   <img src={arrowIcon} alt="Next month" />
                 </button>
               </div>
@@ -77,12 +141,15 @@ const SavingsGoal: React.FunctionComponent = () => {
           <Monthly>
             <div>
               <p>Monthly Amount</p>
-              <p>$521</p>
+              <p>${monthlyAmount.toFixed(2)}</p>
             </div>
 
             <p>
-              You’re planning <strong>48 monthly deposits</strong> to reach your{' '}
-              <strong>$25,000</strong> goal by <strong>October 2020.</strong>
+              You’re planning <strong>{numberOfMonths} monthly deposits</strong>{' '}
+              to reach your <strong>${totalAmount || 0}</strong> goal by{' '}
+              <strong>
+                {month} {year}.
+              </strong>
             </p>
           </Monthly>
 

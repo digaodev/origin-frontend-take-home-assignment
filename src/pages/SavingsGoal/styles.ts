@@ -120,6 +120,8 @@ export const ReachBy = styled.div`
     display: flex;
     align-items: center;
 
+    min-width: 260px;
+
     .btn {
       background: #e1e8ed;
       border: none;
@@ -180,6 +182,7 @@ export const Monthly = styled.div`
       font-size: 26px;
       letter-spacing: -0.216667px;
       line-height: 32px;
+      margin-left: 16px;
       text-align: right;
 
       @media (min-width: 600px) {

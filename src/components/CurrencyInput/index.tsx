@@ -13,6 +13,7 @@ const CurrencyInput: React.FC<MaskedInputProps> = props => {
     allowDecimal: true,
     decimalSymbol: '.',
     decimalLimit: 2,
+    integerLimit: 10,
     allowNegative: false,
     allowLeadingZeroes: false
   });
