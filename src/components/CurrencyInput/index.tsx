@@ -18,7 +18,9 @@ const CurrencyInput: React.FC<MaskedInputProps> = props => {
     allowLeadingZeroes: false
   });
 
-  return <MaskedInput mask={currencyMask} {...props} />;
+  return (
+    <MaskedInput aria-label="currency-input" mask={currencyMask} {...props} />
+  );
 };
 
 export default CurrencyInput;
