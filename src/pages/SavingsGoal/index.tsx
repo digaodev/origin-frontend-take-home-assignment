@@ -103,6 +103,7 @@ const SavingsGoal: React.FunctionComponent = () => {
                 <CurrencyInput
                   id="total"
                   name="total"
+                  aria-label="Total amount"
                   value={totalAmount}
                   onChange={handleInputChange}
                 />
@@ -115,13 +116,14 @@ const SavingsGoal: React.FunctionComponent = () => {
                 <button
                   className="btn btn-prev"
                   type="button"
+                  aria-label="Previous month"
                   onClick={handleDecrementMonth}
                 >
                   <img src={arrowIcon} alt="Previous month" />
                 </button>
                 <div>
                   <p>
-                    <strong>{month}</strong>
+                    <strong data-testid="month-label">{month}</strong>
                   </p>
                   <p>
                     <span>{year}</span>
@@ -130,6 +132,7 @@ const SavingsGoal: React.FunctionComponent = () => {
                 <button
                   className="btn btn-next"
                   type="button"
+                  aria-label="Next month"
                   onClick={handleIncrementMonth}
                 >
                   <img src={arrowIcon} alt="Next month" />
@@ -141,10 +144,15 @@ const SavingsGoal: React.FunctionComponent = () => {
           <Monthly>
             <div>
               <p>Monthly Amount</p>
-              <p>${monthlyAmount.toFixed(2)}</p>
+              <p aria-label="Monthly amount">
+                {monthlyAmount.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD'
+                })}
+              </p>
             </div>
 
-            <p>
+            <p aria-label="Savings summary">
               You’re planning <strong>{numberOfMonths} monthly deposits</strong>{' '}
               to reach your <strong>${totalAmount || 0}</strong> goal by{' '}
               <strong>

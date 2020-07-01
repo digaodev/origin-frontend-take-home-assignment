@@ -72,7 +72,7 @@ export const Card = styled.article`
   }
 `;
 
-export const AmountSection = styled.section`
+export const AmountSection = styled.form`
   display: flex;
   flex-direction: column;
 
@@ -153,7 +153,8 @@ export const ReachBy = styled.div`
       align-items: center;
       justify-content: center;
 
-      border: 1px solid #e1e8ed;
+      border-top: 1px solid #e1e8ed;
+      border-bottom: 1px solid #e1e8ed;
       height: 59px;
       padding: 0 32px;
       width: 100%;
